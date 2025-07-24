@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Descriptions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .description { font-style: italic; color: #555; }
+    .product-card { margin-bottom: 20px; }
+    .product-image { height: 150px; object-fit: contain; }
+  </style>
+</head>
+<body class="p-4">
+  <h1 class="text-center mb-4">🛍️ AI Product Descriptions</h1>
+
+  <div class="container mb-4">
+    <div class="row justify-content-center g-2">
+      <div class="col-md-4">
+        <select id="categoryFilter" class="form-select">
+          <option value="">All Categories</option>
+<option value="beauty">beauty</option>
+<option value="fragrances">fragrances</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="searchInput" placeholder="Search by name..." class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row" id="productContainer">
+    </div>
+  </div>
+
+  <script>
+    const descriptions = {};
+descriptions["beauty"] = [{"title": "Essence Mascara Lash Princess", "category": "beauty", "brand": "Essence", "price": 9.99, "rating": 2.56, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp", "generated_description": "Get ready to flutter those lashes like never before with the Essence Mascara Lash Princess! This magical mascara wand is here to save your lashes from clumps and dullness. With its unique, conic-shaped fiber brush, the Lash Princess defines and separates lashes for a dramatic, bold look. The intense black formula ensures your lashes stand out, and the glossy texture keeps them looking natural and healthy. \n\nFor just $9.99, you can join the princess gang and flaunt"}, {"title": "Eyeshadow Palette with Mirror", "category": "beauty", "brand": "Glamour Beauty", "price": 19.99, "rating": 2.86, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp", "generated_description": "Get ready to dazzle with the Glamour Beauty Eyeshadow Palette! This palette is your secret weapon to creating endless eye looks, from subtle daytime shimmers to bold and smoky nighttime looks. With a range of highly pigmented shades, you can blend and build to create looks for any occasion. The built-in mirror and compact design make it perfect for on-the-go touch-ups. So, whether you're a beauty beginner or a makeup maven, let your creativity shine with the Glamour Beauty"}, {"title": "Powder Canister", "category": "beauty", "brand": "Velvet Touch", "price": 14.99, "rating": 4.64, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp", "generated_description": "Get your hands on the Velvet Touch Powder Canister for a smooth and flawless makeup application experience! This handy little tool is perfect for touching up your makeup on the go. With a 3-month warranty and a 4.64-star rating, you can trust that this product will deliver quality results. Plus, it's currently in stock and priced at just $14.99. So why wait? Add the Velvet Touch Powder Canister to your beauty arsenal today!"}, {"title": "Red Lipstick", "category": "beauty", "brand": "Chic Cosmetics", "price": 12.99, "rating": 4.36, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp", "generated_description": "Hey there, beauty enthusiasts! \ud83d\udc84 \n\nGet ready to paint the town red with the bold and beautiful *Chic Cosmetics Red Lipstick*. This attention-grabbing shade is a must-have for any makeup lover looking to make a statement. With its rich pigmentation and creamy texture, you can achieve a flawless matte finish that will have all eyes on you. \n\nPriced at just $12.99, this highly rated lippie (4.36 stars"}, {"title": "Red Nail Polish", "category": "beauty", "brand": "Nail Couture", "price": 8.99, "rating": 4.32, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/thumbnail.webp", "generated_description": "Get ready to paint the town red - quite literally - with Nail Couture's bold and vibrant Red Nail Polish! This stunning shade is perfect for making a statement and adding a touch of glamour to any look. With a 4.32-star rating, you can be sure of its quality, and at $8.99, it's an absolute steal. We currently have 79 bottles in stock, so grab yours now and start painting! Plus, with our 1-month"}];
+descriptions["fragrances"] = [{"title": "Calvin Klein CK One", "category": "fragrances", "brand": "Calvin Klein", "price": 49.99, "rating": 4.37, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp", "generated_description": "Introducing Calvin Klein CK One, the iconic unisex fragrance by Calvin Klein. This refreshing and clean scent is perfect for anyone who wants to feel fresh and invigorated all day long. With notes of bergamot, cardamom, and pineapple, CK One exudes a vibrant and youthful spirit. It's no wonder that this fragrance has become a classic in the world of perfume and cologne. So why not treat yourself or someone special to the timeless scent of Calvin Klein CK One? You won't be disappointed"}, {"title": "Chanel Coco Noir Eau De", "category": "fragrances", "brand": "Chanel", "price": 129.99, "rating": 4.26, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp", "generated_description": "Experience the essence of Parisian chic with Chanel Coco Noir Eau De. This iconic fragrance from Chanel is an elegant and sensual blend that exudes sophistication and glamour. With top notes of grapefruit and bergamot, a heart of rose and jasmine, and a base of patchouli and vanilla, Coco Noir is a warm and captivating scent that leaves a lasting impression. \n\nOur price for this enchanting fragrance is $129.99, and we offer a 3-year warranty for your peace of"}, {"title": "Dior J'adore", "category": "fragrances", "brand": "Dior", "price": 89.99, "rating": 3.8, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/thumbnail.webp", "generated_description": "Experience the essence of femininity with Dior J'adore. This iconic fragrance by Dior captures the essence of luxury and sophistication in a stunning bottle. With its blend of lush floral notes, Dior J'adore is perfect for the confident and elegant woman. This item is currently in stock for $89.99 and has a 3.8-star rating. We have 98 in stock, so order now! Enjoy a 1-week warranty for added peace of mind."}, {"title": "Dolce Shine Eau de", "category": "fragrances", "brand": "Dolce & Gabbana", "price": 69.99, "rating": 3.96, "availabilityStatus": "Low Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp", "generated_description": "Experience the essence of radiant luminosity with Dolce Shine Eau de Parfum by Dolce & Gabbana. This vibrant and sensual fragrance captures the essence of radiant luminosity, invoking a feeling of warmth and positivity. With its blend of vibrant fruit and floral notes, Dolce Shine is a sunny, bright, and captivating scent that's perfect for any occasion. With a 3.96-star rating, this item is currently low in stock, with only 4 items left. Priced at $69."}, {"title": "Gucci Bloom Eau de", "category": "fragrances", "brand": "Gucci", "price": 79.99, "rating": 2.74, "availabilityStatus": "In Stock", "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp", "generated_description": "Introducing Gucci Bloom Eau de Parfum - a floral fragrance that captures the essence of the Gucci woman. This sophisticated and enchanting scent is perfect for any occasion, with its blend of natural ingredients and unique packaging. Gucci Bloom Eau de Parfum is available for $79.99, and with 91 in stock, you're sure to get your hands on this stunning fragrance. Plus, enjoy peace of mind with the included 6-month warranty. Don't let this gorgeous scent pass you"}];
+
+    function updateUI() {
+      const container = document.getElementById("productContainer");
+      container.innerHTML = "";
+      const category = document.getElementById("categoryFilter").value;
+      const query = document.getElementById("searchInput").value.toLowerCase();
+
+      const filtered = Object.entries(descriptions)
+        .filter(([cat]) => !category || cat === category)
+        .flatMap(([, items]) => items)
+        .filter(p => p.title.toLowerCase().includes(query));
+
+      for (let p of filtered) {
+        container.innerHTML += `
+          <div class="col-md-4">
+            <div class="card product-card h-100">
+              <img src="${p.thumbnail}" class="card-img-top product-image" alt="${p.title}">
+              <div class="card-body">
+                <h5 class="card-title">${p.title}</h5>
+                <p><strong>Brand:</strong> ${p.brand} <br> 💵 ${p.price}$ | ⭐ ${p.rating} | 📦 ${p.availabilityStatus}</p>
+                <p class="description">${p.generated_description}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+    }
+
+    document.getElementById("categoryFilter").addEventListener("change", updateUI);
+    document.getElementById("searchInput").addEventListener("input", updateUI);
+    updateUI();
+  </script>
+</body>
+</html>
